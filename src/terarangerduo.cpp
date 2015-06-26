@@ -160,7 +160,7 @@ void TerarangerDuo::serialDataCallbackDuo(uint8_t single_character)
         int16_t range = input_buffer[1] << 8;
         range |= input_buffer[2];
 
-        if (range < 14000 && range > 200)
+        if (range <= 14000 && range >= 200)
         {
           range_trone_msg.header.stamp = ros::Time::now();
           range_trone_msg.header.seq = seq_ctr++;
@@ -193,7 +193,7 @@ void TerarangerDuo::serialDataCallbackDuo(uint8_t single_character)
         uint16_t range_sonar = input_buffer[4] << 8;
         range_sonar |= input_buffer[5];
 
-        if (range_trone < 14000 && range_trone > 200)
+        if (range_trone <= 14000 && range_trone >= 200)
         {
           range_trone_msg.header.stamp = ros::Time::now();
           range_trone_msg.header.seq = seq_ctr++;
@@ -203,12 +203,12 @@ void TerarangerDuo::serialDataCallbackDuo(uint8_t single_character)
         }
         ROS_DEBUG("[%s] all good %.3f m", ros::this_node::getName().c_str(), range_trone_msg.range);
 
-        if (range_sonar < 765 && range_sonar > 5)
+        if (range_sonar <= 7650 && range_sonar >= 50)
         {
           range_sonar_msg.header.stamp = ros::Time::now();
           range_sonar_msg.header.seq = seq_ctr;
           range_sonar_msg.header.frame_id = "base_link";
-          range_sonar_msg.range = range_sonar * 0.01 ; // convert to m
+          range_sonar_msg.range = range_sonar * 0.001 ; // convert to m
           range_publisher_i_.publish(range_sonar_msg);                                  
         }
         ROS_DEBUG("[%s] all good %.3f m", ros::this_node::getName().c_str(), range_sonar_msg.range);
