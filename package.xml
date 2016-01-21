@@ -6,6 +6,9 @@
 
   <maintainer email="contact@terabee.com">Luis Rodrigues</maintainer>
   <license>GNU GPL</license>
+  <url type="website">http://wiki.ros.org/terarangerduo-ros</url>
+  <url type="repository">https://github.com/Terabee/terarangerduo-ros</url>
+  <url type="bugtracker">https://github.com/Terabee/terarangerduo-ros/issues</url>
 
   <buildtool_depend>catkin</buildtool_depend>
 

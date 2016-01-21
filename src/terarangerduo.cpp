@@ -115,23 +115,6 @@ void TerarangerDuo::serialDataCallbackDuo(uint8_t single_character)
   range_sonar_msg.min_range = 0.05;
   range_sonar_msg.radiation_type = sensor_msgs::Range::ULTRASOUND;
  
-  //Debug Code to show the buffer
-  //if (single_character == 'T')
-  //{
-  //  ROS_INFO("TTTT single_character = %3d, buffer_ctr = %d |%3d|%3d|%3d|%3d|%3d|%3d|%3d|", single_character, buffer_ctr,
-  //           input_buffer[0], input_buffer[1], input_buffer[2], input_buffer[3], input_buffer[4], input_buffer[5], input_buffer[6]);
-  //}
-  //else if (single_character == 'S')
-  //{
-  //  ROS_INFO("SSSS single_character = %3d, buffer_ctr = %d |%3d|%3d|%3d|%3d|%3d|%3d|%3d|", single_character, buffer_ctr,
-  //           input_buffer[0], input_buffer[1], input_buffer[2], input_buffer[3], input_buffer[4], input_buffer[5], input_buffer[6]);
-  //}
-  //else
-  //{
-  //  ROS_INFO("#### single_character = %3d, buffer_ctr = %d |%3d|%3d|%3d|%3d|%3d|%3d|%3d|", single_character, buffer_ctr,
-  //           input_buffer[0], input_buffer[1], input_buffer[2], input_buffer[3], input_buffer[4], input_buffer[5], input_buffer[6]);
-  //}
-
   if (single_character != 'T' && buffer_ctr < 7)
   {
     // not begin of serial feed so add char to buffer
@@ -245,25 +228,21 @@ void TerarangerDuo::setMode(char c)
 
 void TerarangerDuo::dynParamCallback(const terarangerduo::TerarangerDuoConfig &config, uint32_t level)
 {
-  if (config.Speed == terarangerduo::TerarangerDuo_Fast)
+  if (config.Mode == terarangerduo::TerarangerDuo_Fast)
   {
     setMode(FAST_MODE);
   }
 
-  if (config.Speed == terarangerduo::TerarangerDuo_Precise)
+  if (config.Mode == terarangerduo::TerarangerDuo_Precise)
   {
     setMode(PRECISE_MODE);
   }
 
-  if (config.Environment == terarangerduo::TerarangerDuo_Indoor)
-  {
-    setMode(INDOOR_MODE);
-  }
-
-  if (config.Environment == terarangerduo::TerarangerDuo_Outdoor)
+  if (config.Mode == terarangerduo::TerarangerDuo_Outdoor)
   {
     setMode(OUTDOOR_MODE);
   }
+
 }
 
 } // namespace terarangerduo
