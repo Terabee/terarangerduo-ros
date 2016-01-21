@@ -55,8 +55,6 @@ namespace terarangerduo
 
 static const char PRECISE_MODE = 'P';
 static const char FAST_MODE = 'F';
-
-static const char INDOOR_MODE = 'I';
 static const char OUTDOOR_MODE = 'O';
 
 static const char BINARY_MODE = 'B';
